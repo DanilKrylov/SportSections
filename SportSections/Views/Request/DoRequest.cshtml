@@ -1,0 +1,41 @@
+﻿@model QueryViewModel
+
+@{
+    if (Model is not null)
+    {
+        if (Model.QueryIsSuccess)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        @foreach (var name in Model.ColumnNames)
+                        {
+                            <th>
+                                @name
+                            </th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.InfoSets)
+                    {
+                        <tr>
+                            @foreach (var td in item)
+                            {
+
+                                <td>
+                                    @td
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Error sql command</p>
+        }
+
+    }
+}

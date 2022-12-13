@@ -11,6 +11,14 @@
         <a asp-action="Create">Create New</a>
     </p>
 }
+
+
+<div>
+    <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="select sports.sportId, sports.name, count(*) count from sports
+join sportSections on sportSections.sportId = sports.sportId
+group by sports.sportId, sports.name">Отримати кількість секцій для кодного спорту</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>

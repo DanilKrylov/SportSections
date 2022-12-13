@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SportSections;
 using SportSections.Models;
+using SportSections.ViewModels;
 
 namespace SportSections.Controllers
 {
@@ -27,8 +28,34 @@ namespace SportSections.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var sportContext = _context.SportSections.Include(s => s.Sport);
-            return View(await sportContext.ToListAsync());
+            var viewModel = new SportSectionsViewModel()
+            {
+                SportSections = await _context.SportSections.Include(s => s.Sport).ToListAsync()
+            };
+
+            return View(viewModel);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Index(SportSectionsViewModel viewModel)
+        {
+            var sportsmans = _context.SportSections.Include(s => s.Sport).AsQueryable();
+
+
+            if (!string.IsNullOrEmpty(viewModel.SectionNameSearch))
+            {
+                sportsmans = sportsmans.Where(c => c.Name.Contains(viewModel.SectionNameSearch));
+            }
+
+            if (!string.IsNullOrEmpty(viewModel.SportNameSearch))
+            {
+                sportsmans = sportsmans.Where(c => c.Sport.Name.Contains(viewModel.SportNameSearch));
+            }
+
+            viewModel.SportSections = await sportsmans.ToListAsync();
+
+            return View(viewModel);
         }
 
         [AllowAnonymous]

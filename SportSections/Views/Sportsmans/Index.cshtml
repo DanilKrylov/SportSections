@@ -44,6 +44,19 @@
 </div>
 
 
+<div>
+    <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="select name, surname, lastname, count(*) section_count from sportsmans
+join sectionRecords on sectionRecords.sportsmanId = sportsmans.sportsmanId
+group by sportsmans.sportsmanId, name, surname, lastname
+having count(name) = (select max(s.value) from (select count(*) value from sportsmans as t1
+join sectionRecords on sectionRecords.sportsmanId = t1.sportsmanId
+where t1.sportsmanId = sportsmans.sportsmanId) s)">Отримати спортсменів, які відвідують найбільше секцій</a>
+</div>
+
+<div>
+    <a asp-action="Report" asp-controller="Request" asp-route-sqlString="Select * from sportsmans">Отримати всіх спортсменів на друк</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>

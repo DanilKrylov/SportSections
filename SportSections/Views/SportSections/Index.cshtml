@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SportSections.Models.SportSection>
+﻿@model SportSectionsViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,32 +12,63 @@
         <a asp-action="Create">Create New</a>
     </p>
 }
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Пошук за назвою секції</label>
+                <input asp-for="SectionNameSearch" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Пошук за назвою спорту</label>
+                <input asp-for="SportNameSearch" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Пошук" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="select top 10 * from sportSections
+order by cost desc">Отримати 10 найдорожчих секцій</a>
+</div>
+
+<div>
+    <a asp-action="Report" asp-controller="Request" asp-route-sqlString="Select * from sportsections">Отримати всі секції на друк</a>
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Назва
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                Адреса
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cost)
+                Ціна
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RecommendedTraining)
+                Рекомендаційна підготовка
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DoctorRecomended)
+                Рекомендація від доктора
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sport)
+                Спорт
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.SportSections) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
