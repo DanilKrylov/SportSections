@@ -1,0 +1,118 @@
+﻿@model TrainersViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Пошук за прізвищем</label>
+                <input asp-for="SurnameSearch" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Сортування за прізвищем по алфавіту</label>
+                <select asp-for="SurnameOrder">
+                    <option value="0">За спаданням</option>
+                    <option value="1">За зростанням</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Мінімальна кількість секцій спортсмена</label>
+                <input asp-for="MinimumSectionCount" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Максимальна кількість секцій спортсмена</label>
+                <input asp-for="MaximumSectionCount" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Пошук" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ім'я
+            </th>
+            <th>
+                Прізвище
+            </th>
+            <th>
+                По батькові
+            </th>
+            <th>
+                Вік
+            </th>
+            <th>
+                Стать
+            </th>
+            <th>
+                Робочий стаж 
+            </th>
+            <th>
+                Адреса
+            </th>
+            <th>
+                ЗАрплата
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Trainers)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkExperiance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    <a asp-action="DetailsTr" asp-route-id="@item.TrainerId">Секції</a>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <p>|</p>
+                        <a asp-action="Edit" asp-route-id="@item.TrainerId">Edit</a>
+                        <p>|</p>
+                        <a asp-action="Delete" asp-route-id="@item.TrainerId"> Delete </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

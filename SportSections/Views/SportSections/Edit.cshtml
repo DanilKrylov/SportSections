@@ -1,0 +1,59 @@
+﻿@model SportSections.Models.SportSection
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>SportSection</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SportSectionId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" />
+                <span asp-validation-for="Cost" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecommendedTraining" class="control-label"></label>
+                <input asp-for="RecommendedTraining" class="form-control" />
+                <span asp-validation-for="RecommendedTraining" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoctorRecomended" class="control-label"></label>
+                <input asp-for="DoctorRecomended" class="form-control" />
+                <span asp-validation-for="DoctorRecomended" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SportId" class="control-label"></label>
+                <select asp-for="SportId" class="form-control" asp-items="ViewBag.SportId"></select>
+                <span asp-validation-for="SportId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

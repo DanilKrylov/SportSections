@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SportSections.Models.SportSection>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@if (User.Identity.IsAuthenticated)
+{
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecommendedTraining)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorRecomended)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sport)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecommendedTraining)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorRecomended)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sport.Name)
+            </td>
+                <td>
+                    <a asp-action="DetailsTr" asp-route-id="@item.SportSectionId">Тренери секції</a> |
+                    <a asp-action="DetailsSp" asp-route-id="@item.SportSectionId">Спортсмени секції</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <p>|</p>
+                        <a asp-action="Edit" asp-route-id="@item.SportSectionId">Edit</a> 
+                        <p>|</p>
+                        <a asp-action="Delete" asp-route-id="@item.SportSectionId">Delete</a>
+                        
+                    }
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

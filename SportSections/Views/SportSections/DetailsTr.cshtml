@@ -1,0 +1,128 @@
+﻿@model SportSections.Models.SportSection
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>SportSection</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RecommendedTraining)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RecommendedTraining)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DoctorRecomended)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoctorRecomended)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sport)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sport.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-action="CreateDetailsTr" asp-route-sportSectionId="@Model.SportSectionId">Create</a>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Ім'я тренера
+            </th>
+            <th>
+                Прізвище тренера
+            </th>
+            <th>
+                По батькові тренера
+            </th>
+            <th>
+                Вік тренера
+            </th>
+            <th>
+                Стать тренера
+            </th>
+            <th>
+                Початок тренерства
+            </th>
+            <th>
+                Завершення тренерства
+            </th>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Coachings)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainer.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainer.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainer.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainer.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainer.Gender)
+                </td>
+                <td>
+                    @item.StartTime
+                </td>
+                <td>
+                    @item.FinishTime
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td>
+                        <a asp-action="EditDetailsTr" asp-route-id="@item.CoachingId">Edit</a> |
+                        <a asp-action="DeleteDetailsTr" asp-route-id="@item.CoachingId">Delete</a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

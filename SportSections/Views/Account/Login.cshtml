@@ -1,0 +1,25 @@
+﻿@model LoginViewModel
+
+<link rel="stylesheet" href="~/css/form.css">
+<div class="form">
+    <div class="form__content">
+        <div class="form__content__header"><span>Вхід</span></div>
+        <div class="form__form">
+            <form method="post" asp-controller="Account" asp-action="Login">
+                <div class="form__form__item">
+                    <span>Login</span>
+                    <input asp-for="Login">
+                    <span asp-validation-for="Login"></span>
+                </div>
+                <div class="form__form__item">
+                    <span>Пароль</span>
+                    <input asp-for=Password type="password">
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div class="form__form__item">
+                    <input type="submit" id="onetime" value="Увійти">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
