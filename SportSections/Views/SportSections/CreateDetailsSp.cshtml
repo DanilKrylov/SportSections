@@ -4,37 +4,34 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>SectionRecord</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateDetailsSp">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="SportSectionId" />
-            <div class="form-group">
-                <label asp-for="SportsmanId" class="control-label"></label>
-                <select asp-for="SportsmanId" class="form-control" asp-items="ViewBag.SportsmanId"></select>
+<link href="~/css/form.css" rel="stylesheet" />
+<div class="form">
+    <form asp-action="CreateDetailsSp">
+        <div class="form__content">
+            <div class="form__title">
+                <span>Додати спортсмена в секцію</span>
             </div>
-            <div class="form-group">
-                <label asp-for="RecordDate" class="control-label"></label>
-                <input asp-for="RecordDate" class="form-control" />
-                <span asp-validation-for="RecordDate" class="text-danger"></span>
+            <div class="form__items">
+                <input type="hidden" asp-for="SportSectionId" />
+                <div class="form__items__item">
+                    <span class="display">Спортсмен</span>
+                    <select asp-for="SportsmanId" class="form-control" asp-items="ViewBag.SportsmanId"></select>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Дата запису</span>
+                    <input type="datetime-local" asp-for="RecordDate">
+                    <span class="validation" asp-validation-for="RecordDate"></span>
+                </div>
+                <div class="form__items__item">
+                    <input type="submit" value="Додати">
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}

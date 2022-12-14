@@ -4,60 +4,54 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-@if (User.Identity.IsAuthenticated)
-{
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
+<link href="~/css/table.css" rel="stylesheet" />
 
-
-<div>
+<div class="table">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Create" class="table__button" style="margin-bottom: 20px;"><span>Створити</span></a>
+    }
     <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="select sports.sportId, sports.name, count(*) count from sports
 join sportSections on sportSections.sportId = sports.sportId
-group by sports.sportId, sports.name">Отримати кількість секцій для кодного спорту</a>
-</div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
+group by sports.sportId, sports.name" class="table__button" style="margin-bottom: 20px;"><span>Отримати кількість секцій для кодного спорту</span></a>
+    <div class="table__content">
+        <div class="table__row">
+            <div class="table__cell">
                 @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
+            </div>
+            <div class="table__cell">
                 @Html.DisplayNameFor(model => model.SportType)
-            </th>
-            <th>
+            </div>
+            <div class="table__cell">
                 @Html.DisplayNameFor(model => model.ChanceOfInjury)
-            </th>
+            </div>
             @if (User.Identity.IsAuthenticated)
             {
-                <th></th>
+                <div class="table__cell"></div>
             }
-        </tr>
-    </thead>
-    <tbody>
+        </div>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SportType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ChanceOfInjury)
-                </td>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.SportId">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.SportId">Delete</a>
-                    </td>
-                }
-            </tr>
+    <div class="table__row">
+        <div class="table__cell">
+            @Html.DisplayFor(modelItem => item.Name)
+        </div>
+        <div class="table__cell">
+            @Html.DisplayFor(modelItem => item.SportType)
+        </div>
+        <div class="table__cell">
+            @Html.DisplayFor(modelItem => item.ChanceOfInjury)
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+    <div class="table__cell table__cell__buttons">
+        <div class="table__buttons">
+            <a asp-action="Edit" asp-route-id="@item.SportId" class="table__button"><span>Редагувати</span></a>
+            <a asp-action="Edit" asp-route-id="@item.SportId" class="table__button"><span>Видалити</span></a>
+        </div>
+    </div>
         }
-    </tbody>
-</table>
+    </div>
+        }
+    </div>
+</div>

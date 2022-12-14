@@ -1,0 +1,58 @@
+.form {
+}
+.form__content {
+    max-width: 500px;
+    border: 1px solid #eee;
+    background: white;
+    border-radius: 5px;
+}
+.form__title {
+    padding: 15px 0;
+    text-align: center;
+    font-size: 25px;
+    border-bottom: 1px solid #eee;
+}
+.form__items {
+    padding: 20px;
+}
+.form__items__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.form__items__item input,
+.form__items__item select {
+    width: 100%;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    height: 40px;
+    padding: 0 20px;
+}
+
+.form__items__item:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.display {
+    position: absolute;
+    top: -7px;
+    left: 20px;
+    background: white;
+    padding: 0 10px;
+    color: rgb(124, 124, 124);
+}
+.validation {
+    color: rgb(207, 0, 0);
+}
+
+.form__items__item input[type="submit"] {
+    background: #eee;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.form__items__item input[type="submit"]:hover {
+    opacity: 0.8;
+}

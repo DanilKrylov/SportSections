@@ -4,38 +4,35 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Sport</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<link href="~/css/form.css" rel="stylesheet" />
+<div class="form">
+    <form asp-action="Create">
+        <div class="form__content">
+            <div class="form__title">
+                <span>Додавання спорту</span>
             </div>
-            <div class="form-group">
-                <label asp-for="SportType" class="control-label"></label>
-                <input asp-for="SportType" class="form-control" />
-                <span asp-validation-for="SportType" class="text-danger"></span>
+            <div class="form__items">
+                <div class="form__items__item">
+                    <span class="display">Назва</span>
+                    <input type="text" asp-for="Name">
+                    <span class="validation" asp-validation-for="Name"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Тип спорту</span>
+                    <input type="text" asp-for="SportType">
+                    <span class="validation" asp-validation-for="SportType"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Шанс травми</span>
+                    <input type="text" asp-for="ChanceOfInjury">
+                    <span class="validation" asp-validation-for="ChanceOfInjury"></span>
+                </div>
+                <div class="form__items__item">
+                    <input type="submit" value="Створити">
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ChanceOfInjury" class="control-label"></label>
-                <input asp-for="ChanceOfInjury" class="form-control" />
-                <span asp-validation-for="ChanceOfInjury" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

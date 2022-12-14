@@ -4,51 +4,63 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Coaching</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateDetailsTr">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="SportSectionId" />
-            <div class="form-group">
-                <label asp-for="TrainerId" class="control-label"></label>
-                <select asp-for="TrainerId" class="form-control" asp-items="ViewBag.TrainerId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" />
-                <span asp-validation-for="StartTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FinishTime" class="control-label"></label>
-                <input asp-for="FinishTime" class="form-control" />
-                <span asp-validation-for="FinishTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-@if(ViewBag.BestTrainer is not null){
+<link href="~/css/form.css" rel="stylesheet" />
+<link href="~/css/table.css" rel="stylesheet" />
+@if (ViewBag.BestTrainer is not null)
+{
     var trainer = (Trainer)ViewBag.BestTrainer;
-    <p>Рекомендований тренер</p>
-    <p>Ім'я': @trainer.Name</p>
-    <p>Прізвище: @trainer.Surname</p>
-    <p>По батькові: @trainer.LastName</p>
+    <div class="details">
+        <div class="details__content">
+            <div class="details__content__title"><span>Рекомендований тренер</span></div>
+            <div class="details__items">
+                <div class="details__items__row">
+                    <div class="details__item__cell"><span>Ім'я</span></div>
+                    <div class="details__item__cell"><span>@trainer.Name</span></div>
+                </div>
+                <div class="details__items__row">
+                    <div class="details__item__cell"><span>Прізвище</span></div>
+                    <div class="details__item__cell"><span>@trainer.Surname</span></div>
+                </div>
+                <div class="details__items__row">
+                    <div class="details__item__cell"><span>По батькові</span></div>
+                    <div class="details__item__cell"><span>@trainer.LastName</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="form">
+    <form asp-action="CreateDetailsTr">
+        <div class="form__content">
+            <div class="form__title">
+                <span>Додати тренера в секцію</span>
+            </div>
+            <div class="form__items">
+                <input type="hidden" asp-for="SportSectionId" />
+                <div class="form__items__item">
+                    <span class="display">Тренер</span>
+                    <select asp-for="TrainerId" class="form-control" asp-items="ViewBag.TrainerId"></select>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Дата початку</span>
+                    <input type="datetime-local" asp-for="StartTime">
+                    <span class="validation" asp-validation-for="StartTime"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Дата кінця</span>
+                    <input type="datetime-local" asp-for="FinishTime">
+                    <span class="validation" asp-validation-for="FinishTime"></span>
+                </div>
+                <div class="form__items__item">
+                    <input type="submit" value="Додати">
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}

@@ -4,104 +4,79 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-@if (User.Identity.IsAuthenticated)
-{
+<link href="~/css/table.css" rel="stylesheet" />
+<div class="table">
 
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
-
-<div class="row">
-    <div class="col-md-4">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Create" class="table__button" style="margin-bottom: 20px;"><span>Створити</span></a>
+    }
+    <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="select top 10 * from sportSections
+order by cost desc" class="table__button" style="margin-bottom: 20px;"><span>Отримати 10 найдорожчих секцій</span></a>
+    <a asp-action="Report" asp-controller="Request" asp-route-sqlString="Select * from sportsections" class="table__button" style="margin-bottom: 20px;">
+        <span>Отримати всі секції на друк</span>
+    </a>
+    <div class="table__search">
         <form asp-action="Index" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label>Пошук за назвою секції</label>
-                <input asp-for="SectionNameSearch" class="form-control" />
+            <div class="table__search__block">
+                <div class="table__search__item">
+                    <span class="display">Пошук за назвою секції</span>
+                    <input type="text" asp-for="SectionNameSearch">
+                </div>
+                <div class="table__search__item">
+                    <span class="display">Пошук за назвою спорту</span>
+                    <input type="text" asp-for="SportNameSearch">
+                </div>
             </div>
-            <div class="form-group">
-                <label>Пошук за назвою спорту</label>
-                <input asp-for="SportNameSearch" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Пошук" class="btn btn-primary" />
+            <div class="table__search__block">
+                <div class="table__search__item">
+                    <div class="table__search__submit"><input type="submit" value="Пошук"></div>
+                </div>
             </div>
         </form>
     </div>
+    <div class="table__content">
+        <div class="table__row">
+            <div class="table__cell">Назва</div>
+            <div class="table__cell">Адреса</div>
+            <div class="table__cell">Ціна</div>
+            <div class="table__cell">Рекомендаційна підготовка</div>
+            <div class="table__cell">Рекомендація від доктора</div>
+            <div class="table__cell">Спорт</div>
+        </div>
+        @foreach (var item in Model.SportSections)
+        {
+    <div class="table__row">
+        <div class="table__cell">
+            @Html.DisplayFor(modelItem => item.Name)
+        </div>
+        <div class="table__cell">
+            @Html.DisplayFor(modelItem => item.Address)
+        </div>
+        <div class="table__cell">
+            @Html.DisplayFor(modelItem => item.Cost)
+        </div>
+        <div class="table__cell">
+            @Html.DisplayFor(modelItem => item.RecommendedTraining)
+        </div>
+        <div class="table__cell">
+            @Html.DisplayFor(modelItem => item.DoctorRecomended)
+        </div>
+        <div class="table__cell">
+            @Html.DisplayFor(modelItem => item.Sport.Name)
+        </div>
+        <div class="table__cell table__cell__buttons">
+            <div class="table__buttons">
+                <a asp-action="DetailsTr" asp-route-id="@item.SportSectionId" class="table__button"><span>Тренери секції</span></a>
+                <a asp-action="DetailsSp" asp-route-id="@item.SportSectionId" class="table__button"><span>Спортмени секції</span></a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.SportSectionId" class="table__button"><span>Редагувати</span></a>
+                    <a asp-action="Delete" asp-route-id="@item.SportSectionId" class="table__button"><span>Видалити</span></a>
+                }
+            </div>
+        </div>
+    </div>
+        }
+    </div>
 </div>
-
-
-<div>
-    <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="select top 10 * from sportSections
-order by cost desc">Отримати 10 найдорожчих секцій</a>
-</div>
-
-<div>
-    <a asp-action="Report" asp-controller="Request" asp-route-sqlString="Select * from sportsections">Отримати всі секції на друк</a>
-</div>
-
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Назва
-            </th>
-            <th>
-                Адреса
-            </th>
-            <th>
-                Ціна
-            </th>
-            <th>
-                Рекомендаційна підготовка
-            </th>
-            <th>
-                Рекомендація від доктора
-            </th>
-            <th>
-                Спорт
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.SportSections) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecommendedTraining)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoctorRecomended)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sport.Name)
-            </td>
-                <td>
-                    <a asp-action="DetailsTr" asp-route-id="@item.SportSectionId">Тренери секції</a> |
-                    <a asp-action="DetailsSp" asp-route-id="@item.SportSectionId">Спортсмени секції</a>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <p>|</p>
-                        <a asp-action="Edit" asp-route-id="@item.SportSectionId">Edit</a> 
-                        <p>|</p>
-                        <a asp-action="Delete" asp-route-id="@item.SportSectionId">Delete</a>
-                        
-                    }
-                
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
