@@ -1,41 +1,37 @@
 ﻿@model QueryViewModel
 
+    <link href="~/css/table.css" rel="stylesheet" />
+
 @{
     if (Model is not null)
     {
         if (Model.QueryIsSuccess)
         {
-            <table class="table">
-                <thead>
-                    <tr>
+            <div class="table">
+                <div class="table__content">
+                    <div class="table__row">
                         @foreach (var name in Model.ColumnNames)
                         {
-                            <th>
-                                @name
-                            </th>
+                            <div class="table__cell">@name</div>
                         }
-                    </tr>
-                </thead>
-                <tbody>
+                    </div>
                     @foreach (var item in Model.InfoSets)
                     {
-                        <tr>
+                        <div class="table__row">
                             @foreach (var td in item)
                             {
-
-                                <td>
-                                    @td
-                                </td>
+                                <div class="table__cell">@td</div>
                             }
-                        </tr>
+                        </div>
                     }
-                </tbody>
-            </table>
+                </div>
+            </div>
         }
         else
         {
-            <p>Error sql command</p>
+            <p>Помилка SQL запиту</p>
         }
 
     }
 }
+

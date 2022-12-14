@@ -1,46 +1,40 @@
 ﻿@model QueryViewModel
 
-<div class="to_print">
-    @{
-        if (Model is not null)
-        {
-            if (Model.QueryIsSuccess)
+    <link href="~/css/table.css" rel="stylesheet" />
+    <div class="to_print">
+        @{
+            if (Model is not null)
             {
-                <table class="table">
-                    <thead>
-                        <tr>
-                            @foreach (var name in Model.ColumnNames)
-                            {
-                                <th>
-                                    @name
-                                </th>
-                            }
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.InfoSets)
-                        {
-                            <tr>
-                                @foreach (var td in item)
+                if (Model.QueryIsSuccess)
+                {
+                    <div class="table">
+                        <div class="table__content">
+                            <div class="table__row">
+                                @foreach (var name in Model.ColumnNames)
                                 {
-
-                                    <td>
-                                        @td
-                                    </td>
+                                    <div class="table__cell">@name</div>
                                 }
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <p>Error sql command</p>
-            }
+                            </div>
+                            @foreach (var item in Model.InfoSets)
+                            {
+                                <div class="table__row">
+                                    @foreach (var td in item)
+                                    {
+                                        <div class="table__cell">@td</div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <p>Помилка SQL запиту</p>
+                }
 
+            }
         }
-    }
-</div>
+    </div>
 
 
-<script src="~/js/print.js"></script>
+    <script src="~/js/print.js"></script>
