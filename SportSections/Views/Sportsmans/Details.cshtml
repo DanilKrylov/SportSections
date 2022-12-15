@@ -82,7 +82,10 @@
                 </div>
             </div>
         </div>
+        @if (User.Identity.IsAuthenticated)
+    {
         <a asp-action="Edit" asp-route-id="@Model.SportsmanId" class="table__button" style="margin-bottom: 20px;"><span>Редагувати</span></a>
+    }
     </div>
 
 </div>

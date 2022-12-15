@@ -34,20 +34,20 @@ group by sports.sportId, sports.name" class="table__button" style="margin-bottom
         {
     <div class="table__row">
         <div class="table__cell">
-            @Html.DisplayFor(modelItem => item.Name)
+            Назва
         </div>
         <div class="table__cell">
-            @Html.DisplayFor(modelItem => item.SportType)
+            Тип
         </div>
         <div class="table__cell">
-            @Html.DisplayFor(modelItem => item.ChanceOfInjury)
+            Шанс поранення
         </div>
         @if (User.Identity.IsAuthenticated)
         {
     <div class="table__cell table__cell__buttons">
         <div class="table__buttons">
             <a asp-action="Edit" asp-route-id="@item.SportId" class="table__button"><span>Редагувати</span></a>
-            <a asp-action="Edit" asp-route-id="@item.SportId" class="table__button"><span>Видалити</span></a>
+            <a asp-action="Delete" asp-route-id="@item.SportId" class="table__button"><span>Видалити</span></a>
         </div>
     </div>
         }

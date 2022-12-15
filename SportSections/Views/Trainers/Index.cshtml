@@ -15,7 +15,7 @@ join coachings on coachings.trainerId = trainers.trainerId
 group by trainers.trainerId, name, surname, lastname
 having count(name) = (select max(s.value) from (select count(*) value from trainers as t1
 join coachings on coachings.trainerId = t1.trainerId
-where t1.trainerId = trainers.trainerId) s)" class="table__button" style="margin-bottom: 20px;"><span>Отримати тренерів, які тренерують найбільше секцій</span></a>
+group by t1.TrainerId) s)" class="table__button" style="margin-bottom: 20px;"><span>Отримати тренерів, які тренерують найбільше секцій</span></a>
     <div class="table__search">
         <form asp-action="Index" method="post">
             <div class="table__search__block">

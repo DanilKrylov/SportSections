@@ -23,6 +23,7 @@ namespace SportSections
                                                                             c.SportSection.Sport.Name == section.Sport.Name))
                                         .ThenInclude(c => c.SportSection)
                                         .ThenInclude(c => c.Sport)
+                                        .Where(c => c.Coachings.Count() != 0)
                                         .AsEnumerable()
                                         .Where(c => !c.Coachings.Exists(k => k.SportSectionId == sectionId))
                                         .ToList();

@@ -9,12 +9,13 @@
     {
         <a asp-action="Create" class="table__button" style="margin-bottom: 20px;"><span>Створити</span></a>
     }
-    <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="select name, surname, lastname, count(*) section_count from sportsmans
+    <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="
+select name, surname, lastname, count(*) section_count from sportsmans
 join sectionRecords on sectionRecords.sportsmanId = sportsmans.sportsmanId
 group by sportsmans.sportsmanId, name, surname, lastname
-having count(name) = (select max(s.value) from (select count(*) value from sportsmans as t1
+having count(*) = (select max(s.value) from (select count(*) value from sportsmans as t1
 join sectionRecords on sectionRecords.sportsmanId = t1.sportsmanId
-where t1.sportsmanId = sportsmans.sportsmanId) s)" class="table__button" style="margin-bottom: 20px;"><span>Отримати спортсменів, які відвідують найбільше секцій</span></a>
+group by t1.sportsmanId) s)" class="table__button" style="margin-bottom: 20px;"><span>Отримати спортсменів, які відвідують найбільше секцій</span></a>
     <a asp-action="Report" asp-controller="Request" asp-route-sqlString="Select * from sportsmans" class="table__button" style="margin-bottom: 20px;"><span>Отримати всіх спортсменів на друк</span></a>
     <div class="table__search">
         <form asp-action="Index">
