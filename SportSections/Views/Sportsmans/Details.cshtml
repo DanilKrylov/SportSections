@@ -4,121 +4,151 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<link href="~/css/table.css" rel="stylesheet" />
+<div class="details">
+    <div class="details__content">
+        <div class="details__content__title"><span>Деталі</span></div>
+        <div class="details__items">
+            <div class="details__items__row">
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Name)
+                    </span>
+                </div>
+            </div>
+            <div class="details__items__row">
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Surname)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Surname)
+                    </span>
+                </div>
+            </div>
+            <div class="details__items__row">
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.LastName)
+                    </span>
+                </div>
+            </div>
+            <div class="details__items__row">
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Age)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Age)
+                    </span>
+                </div>
+            </div>
+            <div class="details__items__row">
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Gender)
+                    </span>
+                </div>
+            </div>
+            <div class="details__items__row">
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Address)
+                    </span>
+                </div>
+            </div>
+        </div>
+        <a asp-action="Edit" asp-route-id="@Model.SportsmanId" class="table__button" style="margin-bottom: 20px;"><span>Редагувати</span></a>
+    </div>
 
-<div>
-    <h4>Sportsman</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surname)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surname)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-    </dl>
 </div>
+<div class="table">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="CreateDetails" asp-route-sportsmanId="@Model.SportsmanId" class="table__button" style="margin-bottom: 20px;"><span>Створити</span></a>
+    }
+<div class="table__content">
+    <div class="table__row">
+        <div class="table__cell">
+            Назва секції
+        </div>
+        <div class="table__cell">
+            Адреса секції
+        </div>
+        <div class="table__cell">
+            Ціна секції
+        </div>
+        <div class="table__cell">
+            Рекомендована підготовка
+        </div>
+        <div class="table__cell">
+            Рекомендація від лікаря
+        </div>
+        <div class="table__cell">
+            Дата запису
+        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="table__cell"></div>
+        }
+    </div>
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.SportsmanId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    @foreach (var item in Model.SectionRecords)
+    {
+        <div class="table__row">
+            <div class="table__cell">
+                @Html.DisplayFor(modelItem => item.SportSection.Name)
+            </div>
+            <div class="table__cell">
+                @Html.DisplayFor(modelItem => item.SportSection.Address)
+            </div>
+            <div class="table__cell">
+                @Html.DisplayFor(modelItem => item.SportSection.Cost)
+            </div>
+            <div class="table__cell">
+                @Html.DisplayFor(modelItem => item.SportSection.RecommendedTraining)
+            </div>
+            <div class="table__cell">
+                @Html.DisplayFor(modelItem => item.SportSection.DoctorRecomended)
+            </div>
+            <div class="table__cell">
+                @item.RecordDate
+            </div>
 
-
-
-@if (User.Identity.IsAuthenticated)
-{
-    <a asp-action="CreateDetails" asp-route-sportsmanId="@Model.SportsmanId">Create</a>
-}
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Назва секції
-            </th>
-            <th>
-                Адреса секції
-            </th>
-            <th>
-                Ціна секції
-            </th>
-            <th>
-                Рекомендована підготовка
-            </th>
-            <th>
-                Рекомендація від лікаря
-            </th>
-            <th>
-                Дата запису
-            </th>
             @if (User.Identity.IsAuthenticated)
             {
-                <th></th>
+                <div class="table__cell table__cell__buttons">
+                    <div class="table__buttons">
+                        <a asp-action="EditDetails" asp-route-id="@item.SectionRecordId" class="table__button"><span>Редагувати</span></a>
+                        <a asp-action="DeleteDetails" asp-route-id="@item.SectionRecordId" class="table__button"><span>Видалити</span></a>
+                    </div>
+                </div>
             }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.SectionRecords)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SportSection.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SportSection.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SportSection.Cost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SportSection.RecommendedTraining)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SportSection.DoctorRecomended)
-                </td>
-                <td>
-                    @item.RecordDate
-                </td>
-                @if(User.Identity.IsAuthenticated){
-
-                    <td>
-                        <a asp-action="EditDetails" asp-route-id="@item.SectionRecordId" >Edit</a> |
-                        <a asp-action="DeleteDetails" asp-route-id="@item.SectionRecordId">Delete</a>
-                    </td>
-                }
-            </tr>
-        }
-    </tbody>
-</table>
-
+        </div>
+    }
+</div>
+</div>

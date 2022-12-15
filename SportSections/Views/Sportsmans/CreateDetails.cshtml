@@ -4,33 +4,30 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>SectionRecord</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateDetails">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="SportsmanId"/>
-            <div class="form-group">
-                <label asp-for="SportSectionId" class="control-label"></label>
-                <select asp-for="SportSectionId" class="form-control" asp-items="ViewBag.SportSectionId"></select>
+<link href="~/css/form.css" rel="stylesheet" />
+<div class="form">
+    <form asp-action="CreateDetails">
+        <div class="form__content">
+            <div class="form__title">
+                <span>Додання</span>
             </div>
-            <div class="form-group">
-                <label asp-for="RecordDate" class="control-label"></label>
-                <input asp-for="RecordDate" class="form-control" />
-                <span asp-validation-for="RecordDate" class="text-danger"></span>
+            <div class="form__items">
+                <input type="hidden" asp-for="SportsmanId" />
+                <div class="form__items__item">
+                    <span class="display">Спортивна секція</span>
+                    <select asp-for="SportSectionId" class="form-control" asp-items="ViewBag.SportSectionId"></select>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Дата запису</span>
+                    <input type="datetime-local" asp-for="RecordDate">
+                    <span class="validation" asp-validation-for="RecordDate"></span>
+                </div>
+                <div class="form__items__item">
+                    <input type="submit" value="Створити">
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

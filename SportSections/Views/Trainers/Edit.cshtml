@@ -4,64 +4,62 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<link href="~/css/form.css" rel="stylesheet" />
 
-<h4>Trainer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="TrainerId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="form">
+    <form asp-action="Edit">
+        <div class="form__content">
+            <div class="form__title">
+                <span>Редагування тренера</span>
             </div>
-            <div class="form-group">
-                <label asp-for="Surname" class="control-label"></label>
-                <input asp-for="Surname" class="form-control" />
-                <span asp-validation-for="Surname" class="text-danger"></span>
+            <div class="form__items">
+                <input type="hidden" asp-for="TrainerId" />
+                <div class="form__items__item">
+                    <span class="display">Ім'я</span>
+                    <input type="text" asp-for="Name">
+                    <span class="validation" asp-validation-for="Name"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Прізвище</span>
+                    <input type="text" asp-for="Surname">
+                    <span class="validation" asp-validation-for="Surname"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">По батькові</span>
+                    <input type="text" asp-for="LastName">
+                    <span class="validation" asp-validation-for="LastName"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Вік</span>
+                    <input type="number" asp-for="Age">
+                    <span class="validation" asp-validation-for="Age"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Стать</span>
+                    <input type="text" asp-for="Gender">
+                    <span class="validation" asp-validation-for="Gender"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Досвід роботи</span>
+                    <input type="text" asp-for="WorkExperiance">
+                    <span class="validation" asp-validation-for="WorkExperiance"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Адреса</span>
+                    <input type="text" asp-for="Address">
+                    <span class="validation" asp-validation-for="Address"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Адреса</span>
+                    <input type="number" asp-for="Salary">
+                    <span class="validation" asp-validation-for="Salary"></span>
+                </div>
+                <div class="form__items__item">
+                    <input type="submit" value="Редагувати">
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WorkExperiance" class="control-label"></label>
-                <input asp-for="WorkExperiance" class="form-control" />
-                <span asp-validation-for="WorkExperiance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Salary" class="control-label"></label>
-                <input asp-for="Salary" class="form-control" />
-                <span asp-validation-for="Salary" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {

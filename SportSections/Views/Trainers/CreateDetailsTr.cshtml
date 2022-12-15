@@ -4,42 +4,41 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<link href="~/css/form.css" rel="stylesheet" />
 
-<h4>Coaching</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateDetailsTr">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="TrainerId" />
-            <div class="form-group">
-                <label asp-for="SportSectionId" class="control-label"></label>
-                <select asp-for="SportSectionId" class="form-control" asp-items="ViewBag.SportSectionId"></select>
+<div class="form">
+    <form asp-action="CreateDetailsTr">
+        <div class="form__content">
+            <div class="form__title">
+                <span>Додати деталі тренера</span>
             </div>
-            <div class="form-group">
-                <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" />
-                <span asp-validation-for="StartTime" class="text-danger"></span>
+            <div class="form__items">
+                <input type="hidden" asp-for="TrainerId" />
+                <div class="form__items__item">
+                    <span class="display">Спортивна секція</span>
+                    <select asp-for="SportSectionId" class="form-control" asp-items="ViewBag.SportSectionId"></select>
+                    <span class="validation" asp-validation-for="SportSectionId"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Початок тренерства</span>
+                    <input type="datetime-local" asp-for="StartTime">
+                    <span class="validation" asp-validation-for="StartTime"></span>
+                </div>
+                <div class="form__items__item">
+                    <span class="display">Кінець тренерства</span>
+                    <input type="datetime-local" asp-for="FinishTime">
+                    <span class="validation" asp-validation-for="FinishTime"></span>
+                </div>
+                <div class="form__items__item">
+                    <input type="submit" value="Додати">
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="FinishTime" class="control-label"></label>
-                <input asp-for="FinishTime" class="form-control" />
-                <span asp-validation-for="FinishTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}
