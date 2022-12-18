@@ -111,86 +111,96 @@
 </div>
 
 
-<form method="post">
-    <input asp-for="TrainerId" type="hidden" />
-    <p>Вкажіть промідок праці</p>
-    <p>З</p>
-    <input asp-for="MinDateTime" />
-    <p>По</p>
-    <input asp-for="MaxDateTime" />
-    <input type="submit" value="Пошук" />
-</form>
-
 <div class="table">
 
     @if (User.Identity.IsAuthenticated)
     {
         <a asp-action="CreateDetailsTr" asp-route-trainerId="@Model.TrainerId" class="table__button" style="margin-bottom: 20px;"><span>Створити</span></a>
     }
-        <div class="table__content">
-            <div class="table__row">
-                <div class="table__cell">
-                    Назва секції
+    <div class="table__search">
+        <form method="post">
+            <input asp-for="TrainerId" type="hidden" />
+            <div class="table__search__block">
+                <div class="table__search__item">
+                    <span class="display">Мінімальна дата</span>
+                    <input type="datetime-local" asp-for="MinDateTime">
                 </div>
-                <div class="table__cell">
-                    Адреса секції
+                <div class="table__search__item">
+                    <span class="display">Максимальна дата</span>
+                    <input type="datetime-local" asp-for="MaxDateTime">
                 </div>
-                <div class="table__cell">
-                    Ціна секції
-                </div>
-                <div class="table__cell">
-                    Рекомендована підготовка
-                </div>
-                <div class="table__cell">
-                    Рекомендація від лікаря
-                </div>
-                <div class="table__cell">
-                    Початок тренерства
-                </div>
-                <div class="table__cell">
-                    Завершення тренерства
-                </div>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="table__cell"></div>
-                }
             </div>
-
-            @foreach (var item in Model.Trainer.Coachings)
-            {
-                <div class="table__row">
-                    <div class="table__cell">
-                        @Html.DisplayFor(modelItem => item.SportSection.Name)
-                    </div>
-                    <div class="table__cell">
-                        @Html.DisplayFor(modelItem => item.SportSection.Address)
-                    </div>
-                    <div class="table__cell">
-                        @Html.DisplayFor(modelItem => item.SportSection.Cost)
-                    </div>
-                    <div class="table__cell">
-                        @Html.DisplayFor(modelItem => item.SportSection.RecommendedTraining)
-                    </div>
-                    <div class="table__cell">
-                        @Html.DisplayFor(modelItem => item.SportSection.DoctorRecomended)
-                    </div>
-                    <div class="table__cell">
-                        @item.StartTime
-                    </div>
-                    <div class="table__cell">
-                        @item.FinishTime
-                    </div>
-
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div class="table__cell table__cell__buttons">
-                            <div class="table__buttons">
-                                <a asp-action="EditDetailsTr" asp-route-id="@item.CoachingId" class="table__button"><span>Редагувати</span></a>
-                                <a asp-action="DeleteDetailsTr" asp-route-id="@item.CoachingId" class="table__button"><span>Видалити</span></a>
-                            </div>
-                        </div>
-                    }
+            <div class="table__search__block">
+                <div class="table__search__item">
+                    <div class="table__search__submit"><input type="submit" value="Шукати"></div>
                 </div>
+            </div>
+        </form>
+    </div>
+    <div class="table__content">
+        <div class="table__row">
+            <div class="table__cell">
+                Назва секції
+            </div>
+            <div class="table__cell">
+                Адреса секції
+            </div>
+            <div class="table__cell">
+                Ціна секції
+            </div>
+            <div class="table__cell">
+                Рекомендована підготовка
+            </div>
+            <div class="table__cell">
+                Рекомендація від лікаря
+            </div>
+            <div class="table__cell">
+                Початок тренерства
+            </div>
+            <div class="table__cell">
+                Завершення тренерства
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="table__cell"></div>
             }
         </div>
+
+        @foreach (var item in Model.Trainer.Coachings)
+        {
+            <div class="table__row">
+                <div class="table__cell">
+                    @Html.DisplayFor(modelItem => item.SportSection.Name)
+                </div>
+                <div class="table__cell">
+                    @Html.DisplayFor(modelItem => item.SportSection.Address)
+                </div>
+                <div class="table__cell">
+                    @Html.DisplayFor(modelItem => item.SportSection.Cost)
+                </div>
+                <div class="table__cell">
+                    @Html.DisplayFor(modelItem => item.SportSection.RecommendedTraining)
+                </div>
+                <div class="table__cell">
+                    @Html.DisplayFor(modelItem => item.SportSection.DoctorRecomended)
+                </div>
+                <div class="table__cell">
+                    @item.StartTime
+                </div>
+                <div class="table__cell">
+                    @item.FinishTime
+                </div>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="table__cell table__cell__buttons">
+                        <div class="table__buttons">
+                            <a asp-action="EditDetailsTr" asp-route-id="@item.CoachingId" class="table__button"><span>Редагувати</span></a>
+                            <a asp-action="DeleteDetailsTr" asp-route-id="@item.CoachingId" class="table__button"><span>Видалити</span></a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
     </div>
+</div>
