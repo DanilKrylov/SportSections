@@ -11,7 +11,8 @@
     {
         <a asp-action="Create" class="table__button" style="margin-bottom: 20px;"><span>Створити</span></a>
     }
-    <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="select top 10 * from sportSections
+    <a asp-action="DoRequest" asp-controller="Request" asp-route-sqlString="select top 10 sportsections.name section_name, address, cost, recommendedTraining, doctorRecomended, sports.name sport_name from sportSections
+join sports on sports.sportId = sportsections.SportId
 order by cost desc" class="table__button" style="margin-bottom: 20px;"><span>Отримати 10 найдорожчих секцій</span></a>
     <a asp-action="Report" asp-controller="Request" asp-route-sqlString="Select * from sportsections" class="table__button" style="margin-bottom: 20px;">
         <span>Отримати всі секції на друк</span>

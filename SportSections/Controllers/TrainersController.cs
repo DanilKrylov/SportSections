@@ -79,13 +79,31 @@ namespace SportSections.Controllers
                 return NotFound();
             }
 
-            return View(trainer);
+            var viewModel = new TrainerDetails()
+            {
+                Trainer = trainer,
+                TrainerId = Convert.ToInt32(id)
+            };
+
+            return View(viewModel);
         }
 
-        // GET: Trainers/Create
-        public IActionResult Create()
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> DetailsTr(TrainerDetails viewModel)
         {
-            return View();
+            var trainer = await _context.Trainers
+                .Include(c => c.Coachings.Where(k => k.StartTime >= viewModel.MinDateTime && k.FinishTime <= viewModel.MaxDateTime))
+                    .ThenInclude(c => c.SportSection)
+                .FirstOrDefaultAsync(m => m.TrainerId == viewModel.TrainerId);
+            if (trainer == null)
+            {
+                return NotFound();
+            }
+
+            viewModel.Trainer = trainer;
+
+            return View(viewModel);
         }
 
         // POST: Trainers/Create

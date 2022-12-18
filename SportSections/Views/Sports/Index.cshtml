@@ -34,13 +34,13 @@ group by sports.sportId, sports.name" class="table__button" style="margin-bottom
         {
     <div class="table__row">
         <div class="table__cell">
-            Назва
+            @item.Name
         </div>
         <div class="table__cell">
-            Тип
+            @item.SportType
         </div>
         <div class="table__cell">
-            Шанс поранення
+            @item.ChanceOfInjury
         </div>
         @if (User.Identity.IsAuthenticated)
         {

@@ -77,8 +77,10 @@ namespace SportSections.Controllers
                 return NotFound();
             }
 
+
             return View(sportsman);
         }
+
 
         // GET: Sportsmen/Create
         public IActionResult Create()

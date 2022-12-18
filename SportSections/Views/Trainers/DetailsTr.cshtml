@@ -1,4 +1,4 @@
-﻿@model SportSections.Models.Trainer
+﻿@model TrainerDetails
 
 @{
     ViewData["Title"] = "Details";
@@ -11,73 +11,118 @@
         <div class="details__content__title"><span>Деталі</span></div>
         <div class="details__items">
             <div class="details__items__row">
-                <div class="details__item__cell"><span>
-    @Html.DisplayNameFor(model => model.Name)
-</span></div>
-                <div class="details__item__cell"><span>
-    @Html.DisplayFor(model => model.Name)
-</span></div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Trainer.Name)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Trainer.Name)
+                    </span>
+                </div>
             </div>
             <div class="details__items__row">
-                <div class="details__item__cell"><span>
-    @Html.DisplayNameFor(model => model.Surname)
-</span></div>
-                <div class="details__item__cell"><span>
-    @Html.DisplayFor(model => model.Surname)
-</span></div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Trainer.Surname)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Trainer.Surname)
+                    </span>
+                </div>
             </div>
             <div class="details__items__row">
-                <div class="details__item__cell"><span>
-    @Html.DisplayNameFor(model => model.LastName)
-</span></div>
-                <div class="details__item__cell"><span>
-    @Html.DisplayFor(model => model.LastName)
-</span></div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Trainer.LastName)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Trainer.LastName)
+                    </span>
+                </div>
             </div>
             <div class="details__items__row">
-                <div class="details__item__cell"><span>
-    @Html.DisplayNameFor(model => model.Age)
-</span></div>
-                <div class="details__item__cell"><span>
-    @Html.DisplayFor(model => model.Age)
-</span></div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Trainer.Age)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Trainer.Age)
+                    </span>
+                </div>
             </div>
             <div class="details__items__row">
-                <div class="details__item__cell"><span>
-    @Html.DisplayNameFor(model => model.Gender)
-</span></div>
-                <div class="details__item__cell"><span>
-    @Html.DisplayFor(model => model.Gender)
-</span></div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Trainer.Gender)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Trainer.Gender)
+                    </span>
+                </div>
             </div>
             <div class="details__items__row">
-                <div class="details__item__cell"><span>
-    @Html.DisplayNameFor(model => model.WorkExperiance)
-</span></div>
-                <div class="details__item__cell"><span>
-    @Html.DisplayFor(model => model.WorkExperiance)
-</span></div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Trainer.WorkExperiance)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Trainer.WorkExperiance)
+                    </span>
+                </div>
             </div>
             <div class="details__items__row">
-                <div class="details__item__cell"><span>
-    @Html.DisplayNameFor(model => model.Address)
-</span></div>
-                <div class="details__item__cell"><span>
-    @Html.DisplayFor(model => model.Address)
-</span></div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Trainer.Address)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Trainer.Address)
+                    </span>
+                </div>
             </div>
             <div class="details__items__row">
-                <div class="details__item__cell"><span>
-    @Html.DisplayNameFor(model => model.Salary)
-</span></div>
-                <div class="details__item__cell"><span>
-    @Html.DisplayFor(model => model.Salary)
-</span></div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayNameFor(model => model.Trainer.Salary)
+                    </span>
+                </div>
+                <div class="details__item__cell">
+                    <span>
+                        @Html.DisplayFor(model => model.Trainer.Salary)
+                    </span>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<form method="post">
+    <input asp-for="TrainerId" type="hidden" />
+    <p>Вкажіть промідок праці</p>
+    <p>З</p>
+    <input asp-for="MinDateTime" />
+    <p>По</p>
+    <input asp-for="MaxDateTime" />
+    <input type="submit" value="Пошук" />
+</form>
+
 <div class="table">
+
     @if (User.Identity.IsAuthenticated)
     {
         <a asp-action="CreateDetailsTr" asp-route-trainerId="@Model.TrainerId" class="table__button" style="margin-bottom: 20px;"><span>Створити</span></a>
@@ -111,7 +156,7 @@
                 }
             </div>
 
-            @foreach (var item in Model.Coachings)
+            @foreach (var item in Model.Trainer.Coachings)
             {
                 <div class="table__row">
                     <div class="table__cell">

@@ -10,7 +10,7 @@
         }
     }
     rawFile.send(null);
-    var divContents = $('.to_print').html()
+    var divContents = '<p>Звіт на отримання данних з таблиці</p>' + $('.to_print').html()
     var style = "<style>";
     style = style + "table {width: 100%;font: 17px Calibri;}";
     style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
